@@ -1,3 +1,4 @@
+import { SignInButton, SignUpButton, useUser } from "@clerk/nextjs";
 import type { CustomNextPage, GetStaticProps } from "next";
 import Head from "next/head";
 import { FixedLayout } from "src/layout/FixedLayout";
@@ -5,16 +6,36 @@ import type { Abstract } from "src/type/data";
 import { supabase } from "src/utils/supabase";
 
 const Liked: CustomNextPage<{ abstracts: Abstract[] }> = (props) => {
+  const { isSignedIn, isLoaded, user } = useUser();
+
   return (
     <>
       <Head>
         <title>Liked Page</title>
       </Head>
-      <ul>
-        {props.abstracts.map((abstract: Abstract) => (
-          <li key={abstract.id}>{abstract.body}</li>
-        ))}
-      </ul>
+      {!isLoaded ? (
+        <>Loading...</>
+      ) : (
+        <main>
+          {isSignedIn ? (
+            <div>
+              <p>{user?.fullName}がいいねした投稿一覧</p>
+              <ul>
+                {props.abstracts.map((abstract: Abstract) => (
+                  <li key={abstract.id}>{abstract.body}</li>
+                ))}
+              </ul>
+            </div>
+          ) : (
+            <div>
+              <p>Sign in to watch liked items.</p>
+              <SignInButton />
+              <br />
+              <SignUpButton />
+            </div>
+          )}
+        </main>
+      )}
     </>
   );
 };
