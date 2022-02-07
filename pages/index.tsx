@@ -13,7 +13,7 @@ const Home: CustomNextPage<{ abstracts: Abstract[] }> = (props) => {
   return (
     <>
       <Head>
-        <title>Index Page</title>
+        <title>Parable Box</title>
       </Head>
       <ul>
         {props.abstracts.map((abstract: Abstract) => (
