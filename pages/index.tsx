@@ -1,27 +1,35 @@
-import type { CustomNextPage } from "next";
+import type { CustomNextPage, GetStaticProps } from "next";
 import Head from "next/head";
-import { Button } from "src/component/Button";
 import { FluidLayout } from "src/layout/FluidLayout";
+import { supabase } from "src/utils/supabase";
 
-const Home: CustomNextPage = () => {
-  const handleClick = () => {
-    alert("Hello World!");
-  };
-
+type Abstract = {
+  id: number;
+  body: string;
+  user_id: string;
+  created_at: string;
+};
+const Home: CustomNextPage<{ abstracts: Abstract[] }> = (props) => {
   return (
     <>
       <Head>
         <title>Index Page</title>
       </Head>
-
-      <div className="space-y-4">
-        <h2>Index</h2>
-        <Button variant="solid-blue" className="p-2 rounded" onClick={handleClick}>
-          show alert!
-        </Button>
-      </div>
+      <ul>
+        {props.abstracts.map((abstract: Abstract) => (
+          <li key={abstract.id}>{abstract.body}</li>
+        ))}
+      </ul>
     </>
   );
+};
+
+export const getStaticProps: GetStaticProps = async () => {
+  const { data: abstracts } = await supabase.from<Abstract>("abstracts").select("*");
+
+  return {
+    props: { abstracts },
+  };
 };
 
 Home.getLayout = FluidLayout;
