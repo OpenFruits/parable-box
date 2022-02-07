@@ -1,14 +1,9 @@
 import type { CustomNextPage, GetStaticProps } from "next";
 import Head from "next/head";
-import { FluidLayout } from "src/layout/FluidLayout";
+import { FixedLayout } from "src/layout/FixedLayout";
+import type { Abstract } from "src/type/data";
 import { supabase } from "src/utils/supabase";
 
-type Abstract = {
-  id: number;
-  body: string;
-  user_id: string;
-  created_at: string;
-};
 const Home: CustomNextPage<{ abstracts: Abstract[] }> = (props) => {
   return (
     <>
@@ -32,6 +27,6 @@ export const getStaticProps: GetStaticProps = async () => {
   };
 };
 
-Home.getLayout = FluidLayout;
+Home.getLayout = FixedLayout;
 
 export default Home;
