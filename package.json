@@ -11,8 +11,7 @@
     "fix:prettier": "prettier --write .",
     "test:unit": "jest --watch",
     "test:e2e": "playwright test",
-    "env": "vercel env pull .env.local",
-    "prepare": "husky install"
+    "env": "vercel env pull .env.local"
   },
   "postcss": {
     "plugins": {
