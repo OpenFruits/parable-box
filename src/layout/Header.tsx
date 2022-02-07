@@ -1,3 +1,4 @@
+import { SignInButton, UserButton, useUser } from "@clerk/nextjs";
 import type { VFC } from "react";
 import { NavLinks } from "src/component/NavLinks";
 
@@ -8,9 +9,14 @@ const NAV_ITEMS = [
 ];
 
 export const Header: VFC = () => {
+  const { isSignedIn } = useUser();
+
   return (
     <header>
-      <h1 className="text-4xl">Parable Box</h1>
+      <div className="flex justify-between">
+        <h1 className="text-4xl">Parable Box</h1>
+        <div>{isSignedIn ? <UserButton /> : <SignInButton />}</div>
+      </div>
       <nav className="text-gray-500">
         {NAV_ITEMS.map((item) => {
           const { href, label } = item;
