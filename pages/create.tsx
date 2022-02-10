@@ -9,7 +9,7 @@ import { FixedLayout } from "src/layout/FixedLayout";
 import type { NewAbstract } from "src/type/data";
 import { supabaseClient } from "src/utils/supabase";
 
-const AddTodoForm: VFC = () => {
+const AddAbstractForm: VFC = () => {
   const router = useRouter();
   const { session } = useSession();
   const {
@@ -58,7 +58,7 @@ const Create: CustomNextPage = () => {
         ) : (
           <main>
             {isSignedIn ? (
-              <AddTodoForm />
+              <AddAbstractForm />
             ) : (
               <div>
                 <p>Sign in to create item.</p>
