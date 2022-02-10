@@ -1,8 +1,49 @@
-import { SignInButton, SignUpButton, useUser } from "@clerk/nextjs";
+import { SignInButton, SignUpButton, useSession, useUser } from "@clerk/nextjs";
 import type { CustomNextPage } from "next";
 import Head from "next/head";
-import { Button2 as Btn2 } from "src/component/Button2";
+import { useRouter } from "next/router";
+import type { VFC } from "react";
+import type { SubmitHandler } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { FixedLayout } from "src/layout/FixedLayout";
+import type { Abstract } from "src/type/data";
+import { supabaseClient } from "src/utils/supabase";
+
+type NewAbstract = Pick<Abstract, "body">;
+
+const AddTodoForm: VFC = () => {
+  const router = useRouter();
+  const { session } = useSession();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<NewAbstract>();
+
+  const submit: SubmitHandler<NewAbstract> = async (data) => {
+    if (data.body === "") return;
+    const supabaseAccessToken = await session.getToken({
+      template: "Supabase",
+    });
+    const supabase = await supabaseClient(supabaseAccessToken as string);
+    await supabase.from("abstracts").insert({ body: data.body, user_id: session.user.id });
+    router.push("/");
+  };
+
+  return (
+    <div>
+      <h2>命題を投稿</h2>
+      <form onSubmit={handleSubmit(submit)}>
+        <textarea {...register("body", { required: "入力してください" })} />
+        {errors.body?.message && <p>{errors.body.message}</p>}
+        <br />
+        <button onClick={handleSubmit(submit)} className="p-2 bg-sky-200 hover:bg-sky-300 rounded">
+          投稿
+        </button>
+      </form>
+    </div>
+  );
+};
 
 const Create: CustomNextPage = () => {
   const { isSignedIn, isLoaded } = useUser();
@@ -19,13 +60,7 @@ const Create: CustomNextPage = () => {
         ) : (
           <main>
             {isSignedIn ? (
-              <div>
-                <h2>命題を投稿</h2>
-                <textarea name="" id=""></textarea>
-                <form>
-                  <Btn2 tag="input" type="submit" value="submit" className="p-2 bg-sky-200 hover:bg-sky-300 rounded" />
-                </form>
-              </div>
+              <AddTodoForm />
             ) : (
               <div>
                 <p>Sign in to create item.</p>
