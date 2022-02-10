@@ -6,10 +6,8 @@ import type { VFC } from "react";
 import type { SubmitHandler } from "react-hook-form";
 import { useForm } from "react-hook-form";
 import { FixedLayout } from "src/layout/FixedLayout";
-import type { Abstract } from "src/type/data";
+import type { NewAbstract } from "src/type/data";
 import { supabaseClient } from "src/utils/supabase";
-
-type NewAbstract = Pick<Abstract, "body">;
 
 const AddTodoForm: VFC = () => {
   const router = useRouter();
