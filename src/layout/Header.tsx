@@ -6,6 +6,7 @@ const NAV_ITEMS = [
   { href: "/", label: "投稿一覧" },
   { href: "/liked", label: "お気に入り" },
   { href: "/create", label: "新規作成" },
+  { href: "/mypost", label: "自分の投稿" },
 ];
 
 export const Header: VFC = () => {
