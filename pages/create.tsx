@@ -13,11 +13,11 @@ const Create: CustomNextPage = () => {
         <title>Create Page</title>
       </Head>
 
-      <div>
+      <main>
         {!isLoaded ? (
           <>Loading...</>
         ) : (
-          <main>
+          <>
             {isSignedIn ? (
               <AddAbstractForm />
             ) : (
@@ -28,9 +28,9 @@ const Create: CustomNextPage = () => {
                 <SignUpButton />
               </div>
             )}
-          </main>
+          </>
         )}
-      </div>
+      </main>
     </>
   );
 };
