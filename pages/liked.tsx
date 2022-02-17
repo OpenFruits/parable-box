@@ -15,8 +15,6 @@ type Props = {
 const AbstractList: VFC<Props> = (props) => {
   const { session } = useSession();
   const [isLoading, setIsLoading] = useState(true);
-  // eslint-disable-next-line react/destructuring-assignment
-  const { abstracts, setAbstracts } = props;
 
   useEffect(() => {
     const loadAbstracts = async () => {
@@ -27,7 +25,7 @@ const AbstractList: VFC<Props> = (props) => {
         });
         const supabase = await supabaseClient(supabaseAccessToken as string);
         const { data: abstracts } = await supabase.from<Abstract>("abstracts").select("*");
-        abstracts && setAbstracts(abstracts);
+        abstracts && props.setAbstracts(abstracts);
       } catch (e) {
         alert(e);
       } finally {
@@ -40,9 +38,9 @@ const AbstractList: VFC<Props> = (props) => {
 
   if (isLoading) return <div>Loading...</div>;
 
-  return abstracts?.length > 0 ? (
+  return props.abstracts?.length > 0 ? (
     <ul>
-      {abstracts?.map((abstract: Abstract) => (
+      {props.abstracts?.map((abstract: Abstract) => (
         <li key={abstract.id}>{abstract.body}</li>
       ))}
     </ul>
