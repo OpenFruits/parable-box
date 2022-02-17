@@ -61,18 +61,16 @@ const Liked: CustomNextPage<{ abstracts: Abstract[] }> = () => {
       {!isLoaded ? (
         <>Loading...</>
       ) : (
-        <main>
+        <>
           {isSignedIn ? (
             <div>
               <p>{user?.fullName}がいいねした投稿一覧</p>
               <AbstractList abstracts={abstracts} setAbstracts={setAbstracts} />
             </div>
           ) : (
-            <div>
-              <p>Sign in to watch liked items.</p>
-            </div>
+            <p>Sign in to watch liked items.</p>
           )}
-        </main>
+        </>
       )}
     </>
   );
