@@ -3,6 +3,7 @@ import type { CustomNextPage } from "next";
 import Head from "next/head";
 import type { VFC } from "react";
 import { useEffect, useState } from "react";
+import { SessionLoading } from "src/component/SessionLoading";
 import { FixedLayout } from "src/layout/FixedLayout";
 import type { Abstract } from "src/type/data";
 import { supabaseClient } from "src/utils/supabase";
@@ -62,7 +63,7 @@ const MyPost: CustomNextPage<{ abstracts: Abstract[] }> = () => {
         <title>MyPost Page</title>
       </Head>
       {!isLoaded ? (
-        <>Loading...</>
+        <SessionLoading />
       ) : (
         <main>
           {isSignedIn ? (

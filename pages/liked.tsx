@@ -3,6 +3,7 @@ import type { CustomNextPage } from "next";
 import Head from "next/head";
 import { useState } from "react";
 import { AbstractList } from "src/component/AbstractList";
+import { SessionLoading } from "src/component/SessionLoading";
 import { FixedLayout } from "src/layout/FixedLayout";
 import type { Abstract } from "src/type/data";
 
@@ -16,7 +17,7 @@ const Liked: CustomNextPage<{ abstracts: Abstract[] }> = () => {
         <title>Liked Page</title>
       </Head>
       {!isLoaded ? (
-        <>Loading...</>
+        <SessionLoading />
       ) : (
         <>
           {isSignedIn ? (
