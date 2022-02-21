@@ -7,7 +7,7 @@ import { FixedLayout } from "src/layout/FixedLayout";
 import type { Abstract } from "src/type/data";
 
 const MyPost: CustomNextPage<{ abstracts: Abstract[] }> = () => {
-  const { isSignedIn, isLoaded, user } = useUser();
+  const { isSignedIn, isLoaded } = useUser();
 
   return (
     <>
@@ -18,16 +18,7 @@ const MyPost: CustomNextPage<{ abstracts: Abstract[] }> = () => {
       {!isLoaded ? (
         <SessionLoading />
       ) : (
-        <div>
-          {isSignedIn ? (
-            <>
-              <p>{user.fullName}さんの投稿一覧</p>
-              <MyAbstractList />
-            </>
-          ) : (
-            <p>Sign in to watch liked items.</p>
-          )}
-        </div>
+        <div>{isSignedIn ? <MyAbstractList /> : <p>Sign in to watch liked items.</p>}</div>
       )}
     </>
   );
