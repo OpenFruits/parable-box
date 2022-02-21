@@ -19,7 +19,7 @@ const MyPost: CustomNextPage<{ abstracts: Abstract[] }> = () => {
       {!isLoaded ? (
         <SessionLoading />
       ) : (
-        <main>
+        <div>
           {isSignedIn ? (
             <>
               <p>{user.fullName}さんの投稿一覧</p>
@@ -28,7 +28,7 @@ const MyPost: CustomNextPage<{ abstracts: Abstract[] }> = () => {
           ) : (
             <p>Sign in to watch liked items.</p>
           )}
-        </main>
+        </div>
       )}
     </>
   );

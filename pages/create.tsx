@@ -14,24 +14,22 @@ const Create: CustomNextPage = () => {
         <title>Create Page</title>
       </Head>
 
-      <main>
-        {!isLoaded ? (
-          <SessionLoading />
-        ) : (
-          <>
-            {isSignedIn ? (
-              <AddAbstractForm />
-            ) : (
-              <div>
-                <p>Sign in to create item.</p>
-                <SignInButton />
-                <br />
-                <SignUpButton />
-              </div>
-            )}
-          </>
-        )}
-      </main>
+      {!isLoaded ? (
+        <SessionLoading />
+      ) : (
+        <>
+          {isSignedIn ? (
+            <AddAbstractForm />
+          ) : (
+            <div>
+              <p>Sign in to create item.</p>
+              <SignInButton />
+              <br />
+              <SignUpButton />
+            </div>
+          )}
+        </>
+      )}
     </>
   );
 };
