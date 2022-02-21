@@ -4,9 +4,8 @@ import Head from "next/head";
 import { MyAbstractList } from "src/component/MyAbstractList";
 import { SessionLoading } from "src/component/SessionLoading";
 import { FixedLayout } from "src/layout/FixedLayout";
-import type { Abstract } from "src/type/data";
 
-const MyPost: CustomNextPage<{ abstracts: Abstract[] }> = () => {
+const MyPost: CustomNextPage = () => {
   const { isSignedIn, isLoaded } = useUser();
 
   return (
