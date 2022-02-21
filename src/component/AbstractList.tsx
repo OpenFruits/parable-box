@@ -6,14 +6,10 @@ import { FetchLoading } from "src/component/FetchLoading";
 import type { Abstract } from "src/type/data";
 import { supabaseClient } from "src/utils/supabase";
 
-type Props = {
-  abstracts: Abstract[];
-  setAbstracts: React.Dispatch<React.SetStateAction<Abstract[]>>;
-};
-
-export const AbstractList: VFC<Props> = (props) => {
+export const AbstractList: VFC = () => {
   const { session } = useSession();
   const [isLoading, setIsLoading] = useState(true);
+  const [abstracts, setAbstracts] = useState<Abstract[]>([]);
 
   useEffect(() => {
     const loadAbstracts = async () => {
@@ -23,8 +19,8 @@ export const AbstractList: VFC<Props> = (props) => {
           template: "Supabase",
         });
         const supabase = await supabaseClient(supabaseAccessToken as string);
-        const { data: abstracts } = await supabase.from<Abstract>("abstracts").select("*");
-        abstracts && props.setAbstracts(abstracts);
+        const { data } = await supabase.from<Abstract>("abstracts").select("*");
+        data && setAbstracts(data);
       } catch (e) {
         alert(e);
       } finally {
@@ -37,9 +33,9 @@ export const AbstractList: VFC<Props> = (props) => {
 
   if (isLoading) return <FetchLoading />;
 
-  return props.abstracts?.length > 0 ? (
+  return abstracts?.length > 0 ? (
     <ul>
-      {props.abstracts?.map((abstract: Abstract) => (
+      {abstracts?.map((abstract: Abstract) => (
         <li key={abstract.id}>
           <Link href={`/abstract/${abstract.id}`}>
             <a>{abstract.body}</a>

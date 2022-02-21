@@ -1,7 +1,6 @@
 import { useUser } from "@clerk/nextjs";
 import type { CustomNextPage } from "next";
 import Head from "next/head";
-import { useState } from "react";
 import { AbstractList } from "src/component/AbstractList";
 import { SessionLoading } from "src/component/SessionLoading";
 import { FixedLayout } from "src/layout/FixedLayout";
@@ -9,7 +8,6 @@ import type { Abstract } from "src/type/data";
 
 const Liked: CustomNextPage<{ abstracts: Abstract[] }> = () => {
   const { isSignedIn, isLoaded, user } = useUser();
-  const [abstracts, setAbstracts] = useState<Abstract[]>([]);
 
   return (
     <>
@@ -23,7 +21,7 @@ const Liked: CustomNextPage<{ abstracts: Abstract[] }> = () => {
           {isSignedIn ? (
             <div>
               <p>{user?.fullName}がいいねした投稿一覧</p>
-              <AbstractList abstracts={abstracts} setAbstracts={setAbstracts} />
+              <AbstractList />
             </div>
           ) : (
             <p>Sign in to watch liked items.</p>
