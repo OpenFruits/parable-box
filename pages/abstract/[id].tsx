@@ -10,15 +10,10 @@ import { FixedLayout } from "src/layout/FixedLayout";
 import type { Abstract } from "src/type/data";
 import { supabaseClient } from "src/utils/supabase";
 
-type Props = {
-  id: string;
-  abstract: Abstract;
-  setAbstract: React.Dispatch<React.SetStateAction<Abstract>>;
-};
-
-const AbstractDetails: VFC<Props> = (props) => {
+const AbstractDetails: VFC<{ id: string }> = (props) => {
   const { session } = useSession();
   const [isLoading, setIsLoading] = useState(true);
+  const [abstract, setAbstract] = useState<Abstract>();
 
   useEffect(() => {
     const loadAbstracts = async () => {
@@ -28,8 +23,8 @@ const AbstractDetails: VFC<Props> = (props) => {
           template: "Supabase",
         });
         const supabase = await supabaseClient(supabaseAccessToken as string);
-        const { data: abstract } = await supabase.from<Abstract>("abstracts").select("*").eq("id", props.id).single();
-        abstract && props.setAbstract(abstract);
+        const { data } = await supabase.from<Abstract>("abstracts").select("*").eq("id", props.id).single();
+        data && setAbstract(data);
       } catch (e) {
         alert(e);
       } finally {
@@ -42,14 +37,13 @@ const AbstractDetails: VFC<Props> = (props) => {
 
   if (isLoading) return <FetchLoading />;
 
-  return props.abstract ? <div>{props.abstract.body}</div> : <div>No Abstracts!</div>;
+  return abstract ? <div>{abstract.body}</div> : <div>No Abstracts!</div>;
 };
 
 const AbstractId: CustomNextPage = () => {
   const { isSignedIn, isLoaded } = useUser();
   const router = useRouter();
   const abstractId = router.query.id as string;
-  const [abstract, setAbstract] = useState<Abstract>();
 
   return (
     <>
@@ -61,7 +55,7 @@ const AbstractId: CustomNextPage = () => {
       ) : (
         <main>
           {isSignedIn ? (
-            <AbstractDetails id={abstractId} abstract={abstract} setAbstract={setAbstract} />
+            <AbstractDetails id={abstractId} />
           ) : (
             <div>
               <p>Sign in to watch liked items.</p>
