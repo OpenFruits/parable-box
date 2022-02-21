@@ -9,7 +9,7 @@ import { FixedLayout } from "src/layout/FixedLayout";
 const AbstractId: CustomNextPage = () => {
   const { isSignedIn, isLoaded } = useUser();
   const router = useRouter();
-  const abstractId = router.query.id as string;
+  const abstractId = router.query.id;
 
   return (
     <>
@@ -21,7 +21,7 @@ const AbstractId: CustomNextPage = () => {
       ) : (
         <main>
           {isSignedIn ? (
-            <AbstractDetails id={abstractId} />
+            <AbstractDetails id={abstractId as string} />
           ) : (
             <div>
               <p>Sign in to watch liked items.</p>
