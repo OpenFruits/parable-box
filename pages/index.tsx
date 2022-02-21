@@ -1,5 +1,6 @@
 import type { CustomNextPage, GetStaticProps } from "next";
 import Head from "next/head";
+import Link from "next/link";
 import { FixedLayout } from "src/layout/FixedLayout";
 import type { Abstract } from "src/type/data";
 import { supabase } from "src/utils/supabase";
@@ -12,7 +13,11 @@ const Home: CustomNextPage<{ abstracts: Abstract[] }> = (props) => {
       </Head>
       <ul>
         {props.abstracts.map((abstract: Abstract) => (
-          <li key={abstract.id}>{abstract.body}</li>
+          <li key={abstract.id}>
+            <Link href={`/abstract/${abstract.id}`}>
+              <a>{abstract.body}</a>
+            </Link>
+          </li>
         ))}
       </ul>
     </>

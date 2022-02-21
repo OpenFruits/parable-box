@@ -1,4 +1,5 @@
 import { useSession } from "@clerk/nextjs";
+import Link from "next/link";
 import type { VFC } from "react";
 import { useEffect, useState } from "react";
 import type { Abstract } from "src/type/data";
@@ -42,7 +43,11 @@ export const MyAbstractList: VFC<Props> = (props) => {
   return props.abstracts?.length > 0 ? (
     <ul>
       {props.abstracts?.map((abstract: Abstract) => (
-        <li key={abstract.id}>{abstract.body}</li>
+        <li key={abstract.id}>
+          <Link href={`/abstract/${abstract.id}`}>
+            <a>{abstract.body}</a>
+          </Link>
+        </li>
       ))}
     </ul>
   ) : (
