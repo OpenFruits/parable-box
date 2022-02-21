@@ -1,6 +1,7 @@
 import { useSession, useUser } from "@clerk/nextjs";
 import type { CustomNextPage } from "next";
 import Head from "next/head";
+import { useRouter } from "next/router";
 import type { VFC } from "react";
 import { useEffect, useState } from "react";
 import { SessionLoading } from "src/component/SessionLoading";
@@ -9,15 +10,14 @@ import type { Abstract } from "src/type/data";
 import { supabaseClient } from "src/utils/supabase";
 
 type Props = {
-  abstracts: Abstract[];
-  setAbstracts: React.Dispatch<React.SetStateAction<Abstract[]>>;
+  id: string;
+  abstract: Abstract;
+  setAbstract: React.Dispatch<React.SetStateAction<Abstract>>;
 };
 
-const AbstractList: VFC<Props> = (props) => {
+const AbstractDetails: VFC<Props> = (props) => {
   const { session } = useSession();
   const [isLoading, setIsLoading] = useState(true);
-  // eslint-disable-next-line react/destructuring-assignment
-  const { abstracts, setAbstracts } = props;
 
   useEffect(() => {
     const loadAbstracts = async () => {
@@ -27,8 +27,8 @@ const AbstractList: VFC<Props> = (props) => {
           template: "Supabase",
         });
         const supabase = await supabaseClient(supabaseAccessToken as string);
-        const { data: abstracts } = await supabase.from<Abstract>("abstracts").select("*");
-        abstracts && setAbstracts(abstracts);
+        const { data: abstract } = await supabase.from<Abstract>("abstracts").select("*").eq("id", props.id).single();
+        abstract && props.setAbstract(abstract);
       } catch (e) {
         alert(e);
       } finally {
@@ -41,20 +41,14 @@ const AbstractList: VFC<Props> = (props) => {
 
   if (isLoading) return <div>Loading...</div>;
 
-  return abstracts?.length > 0 ? (
-    <ul>
-      {abstracts?.map((abstract: Abstract) => (
-        <li key={abstract.id}>{abstract.body}</li>
-      ))}
-    </ul>
-  ) : (
-    <div>No Abstracts!</div>
-  );
+  return props.abstract ? <div>{props.abstract.body}</div> : <div>No Abstracts!</div>;
 };
 
-const AbstractDetail: CustomNextPage = () => {
+const AbstractId: CustomNextPage = () => {
   const { isSignedIn, isLoaded } = useUser();
-  const [abstracts, setAbstracts] = useState<Abstract[]>([]);
+  const router = useRouter();
+  const abstractId = router.query.id as string;
+  const [abstract, setAbstract] = useState<Abstract>();
 
   return (
     <>
@@ -66,7 +60,7 @@ const AbstractDetail: CustomNextPage = () => {
       ) : (
         <main>
           {isSignedIn ? (
-            <AbstractList abstracts={abstracts} setAbstracts={setAbstracts} />
+            <AbstractDetails id={abstractId} abstract={abstract} setAbstract={setAbstract} />
           ) : (
             <div>
               <p>Sign in to watch liked items.</p>
@@ -78,6 +72,6 @@ const AbstractDetail: CustomNextPage = () => {
   );
 };
 
-AbstractDetail.getLayout = FixedLayout;
+AbstractId.getLayout = FixedLayout;
 
-export default AbstractDetail;
+export default AbstractId;
