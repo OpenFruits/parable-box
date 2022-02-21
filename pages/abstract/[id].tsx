@@ -4,6 +4,7 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import type { VFC } from "react";
 import { useEffect, useState } from "react";
+import { FetchLoading } from "src/component/FetchLoading";
 import { SessionLoading } from "src/component/SessionLoading";
 import { FixedLayout } from "src/layout/FixedLayout";
 import type { Abstract } from "src/type/data";
@@ -39,7 +40,7 @@ const AbstractDetails: VFC<Props> = (props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <FetchLoading />;
 
   return props.abstract ? <div>{props.abstract.body}</div> : <div>No Abstracts!</div>;
 };

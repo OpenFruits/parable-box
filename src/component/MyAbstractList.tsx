@@ -2,6 +2,7 @@ import { useSession } from "@clerk/nextjs";
 import Link from "next/link";
 import type { VFC } from "react";
 import { useEffect, useState } from "react";
+import { FetchLoading } from "src/component/FetchLoading";
 import type { Abstract } from "src/type/data";
 import { supabaseClient } from "src/utils/supabase";
 
@@ -38,7 +39,7 @@ export const MyAbstractList: VFC<Props> = (props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  if (isLoading) return <div>Loading...</div>;
+  if (isLoading) return <FetchLoading />;
 
   return props.abstracts?.length > 0 ? (
     <ul>
