@@ -7,3 +7,13 @@ export type Abstract = {
 };
 
 export type NewAbstract = Pick<Abstract, "body">;
+
+export type Parable = {
+  id: number;
+  body: string;
+  user_id: string;
+  abstract_id: number;
+  created_at: string;
+};
+
+export type NewParable = Pick<Parable, "body">;
