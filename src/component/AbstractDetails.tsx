@@ -1,8 +1,12 @@
 import { useSession } from "@clerk/nextjs";
 import type { VFC } from "react";
 import { useEffect, useState } from "react";
+import type { SubmitHandler } from "react-hook-form";
+import { useForm } from "react-hook-form";
+import TextareaAutosize from "react-textarea-autosize";
 import { FetchLoading } from "src/component/FetchLoading";
-import type { Abstract } from "src/type/data";
+import { NoAbstracts } from "src/component/NoAbstracts";
+import type { Abstract, NewParable } from "src/type/data";
 import { supabaseClient } from "src/utils/supabase";
 
 export const AbstractDetails: VFC<{ id: string }> = (props) => {
@@ -30,7 +34,40 @@ export const AbstractDetails: VFC<{ id: string }> = (props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<NewParable>();
+
+  const submit: SubmitHandler<NewParable> = async (data) => {
+    if (data.body === "") return;
+    const supabaseAccessToken = await session.getToken({
+      template: "Supabase",
+    });
+    const supabase = await supabaseClient(supabaseAccessToken as string);
+    // eslint-disable-next-line @typescript-eslint/naming-convention
+    await supabase.from("parables").insert({ body: data.body, user_id: session.user.id, abstract_id: abstract.id });
+  };
+
   if (isLoading) return <FetchLoading />;
 
-  return abstract ? <div>{abstract.body}</div> : <div>No Abstracts!</div>;
+  return abstract ? (
+    <div>
+      <p>{abstract.body}</p>
+      <div>
+        <h2>具体例を投稿</h2>
+        <form onSubmit={handleSubmit(submit)}>
+          <TextareaAutosize {...register("body", { required: "入力してください" })} />
+          {errors.body?.message && <p className="text-red-500">{errors.body.message}</p>}
+          <br />
+          <button onClick={handleSubmit(submit)} className="p-2 bg-sky-200 hover:bg-sky-300 rounded">
+            投稿
+          </button>
+        </form>
+      </div>
+    </div>
+  ) : (
+    <NoAbstracts />
+  );
 };
