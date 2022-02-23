@@ -3,6 +3,7 @@ import Link from "next/link";
 import type { VFC } from "react";
 import { useEffect, useState } from "react";
 import { FetchLoading } from "src/component/FetchLoading";
+import { NoAbstracts } from "src/component/NoAbstracts";
 import type { Abstract } from "src/type/data";
 import { supabaseClient } from "src/utils/supabase";
 
@@ -48,6 +49,6 @@ export const MyAbstractList: VFC = () => {
       ))}
     </ul>
   ) : (
-    <div>No Abstracts!</div>
+    <NoAbstracts />
   );
 };
