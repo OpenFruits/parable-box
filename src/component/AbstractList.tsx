@@ -2,6 +2,7 @@ import { useSession } from "@clerk/nextjs";
 import Link from "next/link";
 import type { VFC } from "react";
 import { useEffect, useState } from "react";
+import { AbstractCard } from "src/component/AbstractCard";
 import { FetchLoading } from "src/component/FetchLoading";
 import { NoAbstracts } from "src/component/NoAbstracts";
 import type { Abstract } from "src/type/data";
@@ -39,7 +40,9 @@ export const AbstractList: VFC = () => {
       {abstracts?.map((abstract: Abstract) => (
         <li key={abstract.id}>
           <Link href={`/abstract/${abstract.id}`}>
-            <a>{abstract.body}</a>
+            <a>
+              <AbstractCard abstract={abstract} />
+            </a>
           </Link>
         </li>
       ))}

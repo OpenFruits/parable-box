@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import type { SubmitHandler } from "react-hook-form";
 import { useForm } from "react-hook-form";
 import TextareaAutosize from "react-textarea-autosize";
+import { AbstractCard } from "src/component/AbstractCard";
 import { FetchLoading } from "src/component/FetchLoading";
 import { NoAbstracts } from "src/component/NoAbstracts";
 import type { Abstract, NewParable } from "src/type/data";
@@ -54,7 +55,7 @@ export const AbstractDetails: VFC<{ id: string }> = (props) => {
 
   return abstract ? (
     <div>
-      <p>{abstract.body}</p>
+      <AbstractCard abstract={abstract} />
       <div>
         <h2>具体例を投稿</h2>
         <form onSubmit={handleSubmit(submit)}>
