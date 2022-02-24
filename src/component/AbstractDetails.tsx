@@ -62,8 +62,13 @@ export const AbstractDetails: VFC<{ id: string }> = (props) => {
           <TextareaAutosize {...register("body", { required: "入力してください" })} />
           {errors.body?.message && <p className="text-red-500">{errors.body.message}</p>}
           <br />
-          <button onClick={handleSubmit(submit)} className="p-2 bg-sky-200 hover:bg-sky-300 rounded">
-            投稿
+          <button
+            onClick={handleSubmit(submit)}
+            className="group [transform:translateZ(0)] overflow-hidden relative before:absolute before:bottom-0 before:left-0 p-2 before:w-full before:h-full bg-sky-200 before:bg-sky-500 rounded-lg before:transition before:duration-500 before:ease-in-out before:scale-x-0 hover:before:scale-x-100 before:origin-[100%_100%] hover:before:origin-[0_0]"
+          >
+            <span className="relative z-0 text-black group-hover:text-gray-200 transition duration-500 ease-in-out">
+              投稿
+            </span>
           </button>
         </form>
       </div>
