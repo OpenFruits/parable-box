@@ -31,7 +31,7 @@ export const Header: VFC = () => {
         {NAV_ITEMS.map((item) => {
           const { href, label } = item;
           return (
-            <NavLinks key={href} href={href} activeClass="text-black">
+            <NavLinks key={href} href={href} activeClass="text-black bg-gray-100">
               <a className="inline-block relative after:absolute after:bottom-0 after:left-0 p-4 after:w-full after:h-[2px] after:bg-black after:transition-transform after:duration-300 after:ease-in-out after:scale-x-0 hover:after:scale-x-100 after:origin-bottom-right hover:after:origin-bottom-left">
                 {label}
               </a>
