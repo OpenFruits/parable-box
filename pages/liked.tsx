@@ -7,7 +7,7 @@ import { FixedLayout } from "src/layout/FixedLayout";
 import type { Abstract } from "src/type/data";
 
 const Liked: CustomNextPage<{ abstracts: Abstract[] }> = () => {
-  const { isSignedIn, isLoaded, user } = useUser();
+  const { isSignedIn, isLoaded } = useUser();
 
   return (
     <>
@@ -20,7 +20,6 @@ const Liked: CustomNextPage<{ abstracts: Abstract[] }> = () => {
         <>
           {isSignedIn ? (
             <div>
-              <p>{user?.fullName}がいいねした投稿一覧</p>
               <AbstractList />
             </div>
           ) : (
