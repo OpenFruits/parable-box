@@ -3,10 +3,10 @@ import type { VFC } from "react";
 import { NavLinks } from "src/component/NavLinks";
 
 const NAV_ITEMS = [
-  { href: "/", label: "投稿一覧" },
-  { href: "/liked", label: "お気に入り" },
-  { href: "/create", label: "新規作成" },
-  { href: "/mypost", label: "自分の投稿" },
+  { href: "/", label: "TimeLine" },
+  { href: "/liked", label: "Liked" },
+  { href: "/create", label: "Add New" },
+  { href: "/mypost", label: "My Post" },
 ];
 
 export const Header: VFC = () => {
