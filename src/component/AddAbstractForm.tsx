@@ -32,7 +32,10 @@ export const AddAbstractForm: VFC = () => {
     <div>
       <h2>命題を投稿</h2>
       <form onSubmit={handleSubmit(submit)}>
-        <TextareaAutosize {...register("body", { required: "入力してください" })} />
+        <TextareaAutosize
+          className="border-gray-200 focus:border-blue-200 focus:ring-0 resize-none"
+          {...register("body", { required: "入力してください" })}
+        />
         {errors.body?.message && <p className="text-red-500">{errors.body.message}</p>}
         <br />
         <Button onClick={handleSubmit(submit)}>投稿</Button>
