@@ -3,7 +3,7 @@ import type { CustomNextPage } from "next";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { AbstractDetails } from "src/component/AbstractDetails";
-import { SessionLoading } from "src/component/SessionLoading";
+import { SessionLoading } from "src/component/Loading/SessionLoading";
 import { FixedLayout } from "src/layout/FixedLayout";
 
 const AbstractId: CustomNextPage = () => {

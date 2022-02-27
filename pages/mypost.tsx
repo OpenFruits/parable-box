@@ -1,8 +1,8 @@
 import { useUser } from "@clerk/nextjs";
 import type { CustomNextPage } from "next";
 import Head from "next/head";
+import { SessionLoading } from "src/component/Loading/SessionLoading";
 import { MyAbstractList } from "src/component/MyAbstractList";
-import { SessionLoading } from "src/component/SessionLoading";
 import { FixedLayout } from "src/layout/FixedLayout";
 
 const MyPost: CustomNextPage = () => {

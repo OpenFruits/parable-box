@@ -2,7 +2,7 @@ import { useUser } from "@clerk/nextjs";
 import type { CustomNextPage } from "next";
 import Head from "next/head";
 import { AbstractList } from "src/component/AbstractList";
-import { SessionLoading } from "src/component/SessionLoading";
+import { SessionLoading } from "src/component/Loading/SessionLoading";
 import { FixedLayout } from "src/layout/FixedLayout";
 import type { Abstract } from "src/type/data";
 

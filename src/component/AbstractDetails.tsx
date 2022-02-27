@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 import TextareaAutosize from "react-textarea-autosize";
 import { AbstractCard } from "src/component/AbstractCard";
 import { Button } from "src/component/Button";
-import { FetchLoading } from "src/component/FetchLoading";
+import { FetchLoading } from "src/component/Loading/FetchLoading";
 import { NoAbstracts } from "src/component/NoAbstracts";
 import type { Abstract, NewParable } from "src/type/data";
 import { supabaseClient } from "src/utils/supabase";

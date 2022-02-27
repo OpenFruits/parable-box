@@ -2,7 +2,7 @@ import { SignInButton, SignUpButton, useUser } from "@clerk/nextjs";
 import type { CustomNextPage } from "next";
 import Head from "next/head";
 import { AddAbstractForm } from "src/component/AddAbstractForm";
-import { SessionLoading } from "src/component/SessionLoading";
+import { SessionLoading } from "src/component/Loading/SessionLoading";
 import { FixedLayout } from "src/layout/FixedLayout";
 
 const Create: CustomNextPage = () => {
