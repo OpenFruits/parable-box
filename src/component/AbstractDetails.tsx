@@ -8,13 +8,15 @@ import { AbstractCard } from "src/component/AbstractCard";
 import { Button } from "src/component/Button";
 import { FetchLoading } from "src/component/Loading/FetchLoading";
 import { NoAbstracts } from "src/component/NoAbstracts";
-import type { Abstract, NewParable } from "src/type/data";
+import { ParableList } from "src/component/ParableList";
+import type { Abstract, NewParable, Parable } from "src/type/data";
 import { supabaseClient } from "src/utils/supabase";
 
 export const AbstractDetails: VFC<{ id: string }> = (props) => {
   const { session } = useSession();
   const [isLoading, setIsLoading] = useState(true);
   const [abstract, setAbstract] = useState<Abstract>();
+  const [parables, setParables] = useState<Parable[]>();
 
   useEffect(() => {
     const loadAbstracts = async () => {
@@ -26,6 +28,8 @@ export const AbstractDetails: VFC<{ id: string }> = (props) => {
         const supabase = await supabaseClient(supabaseAccessToken as string);
         const { data } = await supabase.from<Abstract>("abstracts").select("*").eq("id", props.id).single();
         data && setAbstract(data);
+        const { data: parableList } = await supabase.from<Parable>("parables").select("*").eq("abstract_id", data.id);
+        parableList && setParables(parableList);
       } catch (e) {
         alert(e);
       } finally {
@@ -57,6 +61,7 @@ export const AbstractDetails: VFC<{ id: string }> = (props) => {
   return abstract ? (
     <div>
       <AbstractCard abstract={abstract} />
+      {parables.length !== 0 && <ParableList parables={parables} />}
       <div>
         <h2>具体例を投稿</h2>
         <form onSubmit={handleSubmit(submit)}>
