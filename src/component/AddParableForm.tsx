@@ -31,7 +31,7 @@ export const AddParableForm: VFC<{ abstractId: number }> = (props) => {
 
   return (
     <div>
-      <h2>具体例を投稿</h2>
+      <h2>事象（具体）を投稿</h2>
       <form onSubmit={handleSubmit(submit)}>
         <TextareaAutosize
           className="border-gray-200 focus:border-blue-200 focus:ring-0 resize-none"
