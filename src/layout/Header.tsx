@@ -1,5 +1,6 @@
 import { SignInButton, UserButton, useUser } from "@clerk/nextjs";
 import type { VFC } from "react";
+import { AppLogo } from "src/component/AppLogo";
 import { NavLinks } from "src/component/NavLinks";
 
 const NAV_ITEMS = [
@@ -15,7 +16,7 @@ export const Header: VFC = () => {
   return (
     <header>
       <div className="flex justify-between items-center m-4">
-        <h1 className="text-4xl">Parable Box</h1>
+        <AppLogo />
         <div>
           {isSignedIn ? (
             <div className="flex gap-x-2">
