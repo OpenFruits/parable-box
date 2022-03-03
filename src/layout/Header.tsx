@@ -10,16 +10,15 @@ const NAV_ITEMS = [
 ];
 
 export const Header: VFC = () => {
-  const { isSignedIn, user } = useUser();
+  const { isSignedIn } = useUser();
 
   return (
     <header>
-      <div className="flex justify-between">
+      <div className="flex justify-between items-center m-4">
         <h1 className="text-4xl">Parable Box</h1>
         <div>
           {isSignedIn ? (
             <div className="flex gap-x-2">
-              <p>{user.fullName}</p>
               <UserButton />
             </div>
           ) : (
