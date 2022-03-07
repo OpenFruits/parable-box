@@ -17,7 +17,7 @@ const MyPost: CustomNextPage = () => {
       {!isLoaded ? (
         <SessionLoading />
       ) : (
-        <div>{isSignedIn ? <MyAbstractList /> : <p>Sign in to watch liked items.</p>}</div>
+        <div>{isSignedIn ? <MyAbstractList /> : <p>Sign in to watch my items.</p>}</div>
       )}
     </>
   );

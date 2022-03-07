@@ -14,19 +14,7 @@ const Liked: CustomNextPage<{ abstracts: Abstract[] }> = () => {
       <Head>
         <title>Liked Page</title>
       </Head>
-      {!isLoaded ? (
-        <SessionLoading />
-      ) : (
-        <>
-          {isSignedIn ? (
-            <div>
-              <AbstractList />
-            </div>
-          ) : (
-            <p>Sign in to watch liked items.</p>
-          )}
-        </>
-      )}
+      {!isLoaded ? <SessionLoading /> : <>{isSignedIn ? <AbstractList /> : <p>Sign in to watch liked items.</p>}</>}
     </>
   );
 };

@@ -19,15 +19,7 @@ const AbstractId: CustomNextPage = () => {
       {!isLoaded ? (
         <SessionLoading />
       ) : (
-        <div>
-          {isSignedIn ? (
-            <AbstractDetails id={abstractId as string} />
-          ) : (
-            <div>
-              <p>Sign in to watch liked items.</p>
-            </div>
-          )}
-        </div>
+        <div>{isSignedIn ? <AbstractDetails id={abstractId as string} /> : <p>Sign in to watch detail.</p>}</div>
       )}
     </>
   );
