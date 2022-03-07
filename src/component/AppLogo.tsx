@@ -7,6 +7,7 @@ export const AppLogo: VFC = () => {
       <AppIcon />
       <p>Parable</p>
       <p>Box</p>
+      <small>（開発中）</small>
     </div>
   );
 };
