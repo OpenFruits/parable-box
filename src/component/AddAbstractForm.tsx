@@ -29,11 +29,11 @@ export const AddAbstractForm: VFC = () => {
   };
 
   return (
-    <div>
+    <div className="py-4">
       <h2>命題（抽象）を投稿</h2>
       <form onSubmit={handleSubmit(submit)}>
         <TextareaAutosize
-          className="border-gray-200 focus:border-blue-200 focus:ring-0 resize-none"
+          className="w-full border-gray-200 focus:border-blue-200 focus:ring-0 resize-none"
           {...register("body", { required: "入力してください" })}
         />
         {errors.body?.message && <p className="text-red-500">{errors.body.message}</p>}
