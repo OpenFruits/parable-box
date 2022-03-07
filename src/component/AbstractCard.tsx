@@ -1,15 +1,18 @@
+import clsx from "clsx";
 import type { VFC } from "react";
 import type { Abstract } from "src/type/data";
 
-export const AbstractCard: VFC<{ abstract: Abstract }> = (props) => {
+export const AbstractCard: VFC<{ abstract: Abstract; hasLink?: boolean }> = (props) => {
   return (
-    <div>
-      <div className="group relative my-6">
-        <div className="absolute -inset-0 bg-gradient-to-r from-pink-600 hover:from-pink-900 to-purple-600 hover:to-purple-900 rounded-lg opacity-75 group-hover:opacity-100 blur transition duration-200 group-hover:duration-200"></div>
-        <div className="relative py-3 px-6 text-gray-600 hover:text-gray-900 bg-gray-100 hover:bg-white rounded-lg">
-          <div>{props.abstract.body}</div>
-        </div>
-      </div>
+    <div className={clsx("relative p-3 bg-gray-100 rounded-md", props.hasLink && "bg-transparent hover:bg-gray-100")}>
+      <h3 className="text-sm font-medium leading-5">{props.abstract.body}</h3>
+      <ul className="flex mt-1 space-x-1 text-xs font-normal leading-4 text-gray-500">
+        <li>3h ago</li>
+        <li>&middot;</li>
+        <li>3 likes</li>
+        <li>&middot;</li>
+        <li>4 parables</li>
+      </ul>
     </div>
   );
 };
