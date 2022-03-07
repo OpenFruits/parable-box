@@ -12,12 +12,12 @@ const Home: CustomNextPage<{ abstracts: Abstract[] }> = (props) => {
       <Head>
         <title>Parable Box</title>
       </Head>
-      <ul>
+      <ul className="py-4">
         {props.abstracts.map((abstract: Abstract) => (
           <li key={abstract.id}>
             <Link href={`/abstract/${abstract.id}`}>
               <a>
-                <AbstractCard abstract={abstract} />
+                <AbstractCard abstract={abstract} hasLink />
               </a>
             </Link>
           </li>

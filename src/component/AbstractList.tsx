@@ -12,12 +12,12 @@ export const AbstractList: VFC = () => {
   if (isLoading) return <FetchLoading />;
 
   return abstracts?.length > 0 ? (
-    <ul>
+    <ul className="py-4">
       {abstracts?.map((abstract: Abstract) => (
         <li key={abstract.id}>
           <Link href={`/abstract/${abstract.id}`}>
             <a>
-              <AbstractCard abstract={abstract} />
+              <AbstractCard abstract={abstract} hasLink />
             </a>
           </Link>
         </li>
