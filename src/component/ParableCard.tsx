@@ -1,5 +1,5 @@
 import type { VFC } from "react";
-import type { Parable } from "src/type/data";
+import type { Parable } from "src/type";
 
 export const ParableCard: VFC<{ parable: Parable }> = (props) => {
   return (

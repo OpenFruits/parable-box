@@ -1,6 +1,6 @@
 import { useSession } from "@clerk/nextjs";
 import { useEffect, useState } from "react";
-import type { Abstract } from "src/type/data";
+import type { Abstract } from "src/type";
 import { supabaseClient } from "src/utils/supabase";
 
 export const useAbstract = (id: string) => {

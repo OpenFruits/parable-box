@@ -4,7 +4,7 @@ import { AbstractCard } from "src/component/AbstractCard";
 import { FetchLoading } from "src/component/Loading/FetchLoading";
 import { NoAbstracts } from "src/component/NoAbstracts";
 import { useAbstractList } from "src/hooks/useAbstractList";
-import type { Abstract } from "src/type/data";
+import type { Abstract } from "src/type";
 
 export const AbstractList: VFC = () => {
   const { abstracts, isLoading } = useAbstractList();

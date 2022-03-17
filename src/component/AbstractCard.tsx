@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import type { VFC } from "react";
-import type { Abstract } from "src/type/data";
+import type { Abstract } from "src/type";
 
 export const AbstractCard: VFC<{ abstract: Abstract; hasLink?: boolean }> = (props) => {
   return (

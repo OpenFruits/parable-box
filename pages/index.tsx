@@ -3,7 +3,7 @@ import Head from "next/head";
 import Link from "next/link";
 import { AbstractCard } from "src/component/AbstractCard";
 import { FixedLayout } from "src/layout/FixedLayout";
-import type { Abstract } from "src/type/data";
+import type { Abstract } from "src/type";
 import { supabase } from "src/utils/supabase";
 
 const Home: CustomNextPage<{ abstracts: Abstract[] }> = (props) => {

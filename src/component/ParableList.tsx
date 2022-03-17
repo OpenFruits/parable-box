@@ -3,7 +3,7 @@ import { FetchLoading } from "src/component/Loading/FetchLoading";
 import { NoParables } from "src/component/NoParables";
 import { ParableCard } from "src/component/ParableCard";
 import { useParableList } from "src/hooks/useParableList";
-import type { Parable } from "src/type/data";
+import type { Parable } from "src/type";
 
 export const ParableList: VFC<{ abstractId: number }> = (props) => {
   const { parables, isLoading } = useParableList(props.abstractId);

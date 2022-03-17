@@ -4,7 +4,7 @@ import Head from "next/head";
 import { AbstractList } from "src/component/AbstractList";
 import { SessionLoading } from "src/component/Loading/SessionLoading";
 import { FixedLayout } from "src/layout/FixedLayout";
-import type { Abstract } from "src/type/data";
+import type { Abstract } from "src/type";
 
 const Liked: CustomNextPage<{ abstracts: Abstract[] }> = () => {
   const { isSignedIn, isLoaded } = useUser();

@@ -5,7 +5,7 @@ import type { SubmitHandler } from "react-hook-form";
 import { useForm } from "react-hook-form";
 import TextareaAutosize from "react-textarea-autosize";
 import { Button } from "src/component/Button";
-import type { NewAbstract } from "src/type/data";
+import type { NewAbstract } from "src/type";
 import { supabaseClient } from "src/utils/supabase";
 
 export const AddAbstractForm: VFC = () => {
